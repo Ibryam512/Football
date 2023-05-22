@@ -57,8 +57,10 @@
 
             foreach (var goal in Goals)
             {
-                int minutes = goal.Key.Hour > 0 ? goal.Key.Minute + 60 : goal.Key.Minute;
-                Console.WriteLine($"In the {minutes}:{goal.Key.Second} minute {goal.Value.Name} with number {goal.Value.Number} scored a goal for {FindTeamName(goal.Value)}");
+                var pairKey = goal.Key;
+                var pairValue = goal.Value;
+                int minutes = pairKey.Hour > 0 ? pairKey.Minute + (pairKey.Hour * 60) : pairKey.Minute;
+                Console.WriteLine($"In the {minutes}:{pairKey.Second} minute {pairValue.Name} with number {pairValue.Number} scored a goal for {FindTeamName(pairValue)}");
             }
 
             Console.WriteLine(new string('-', 50));
