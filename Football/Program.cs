@@ -225,11 +225,11 @@ try
         }
     };
 
-    games[0].AddGoal(14, playersFromTeamOne[2]);
-    games[0].AddGoal(28, playersFromTeamTwo[4]);
-    games[0].AddGoal(49, playersFromTeamOne[1]);
-    games[0].AddGoal(64, playersFromTeamTwo[0]);
-    games[0].AddGoal(87, playersFromTeamTwo[0]);
+    games[0].AddGoal(new TimeOnly(0, 14, 15), playersFromTeamOne[2]);
+    games[0].AddGoal(new TimeOnly(0, 28, 18), playersFromTeamTwo[4]);
+    games[0].AddGoal(new TimeOnly(0, 49, 47), playersFromTeamOne[1]);
+    games[0].AddGoal(new TimeOnly(1, 17, 18), playersFromTeamTwo[0]);
+    games[0].AddGoal(new TimeOnly(1, 27, 12), playersFromTeamTwo[0]);
 
     games[0].DisplayGoalsHistory();
 }

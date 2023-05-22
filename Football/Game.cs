@@ -29,7 +29,7 @@
         public Referee Referee { get; set; }
         public Referee AssistantOne { get; set; }
         public Referee AssistantTwo { get; set; }
-        public Dictionary<int, FootballPlayer> Goals { get; private set; }
+        public Dictionary<TimeOnly, FootballPlayer> Goals { get; private set; }
         public string GameResult 
         { 
             get => $"{GoalsOfTeamOne}" +
@@ -46,7 +46,7 @@
 
         public Game()
         {
-            Goals = new Dictionary<int, FootballPlayer>();
+            Goals = new Dictionary<TimeOnly, FootballPlayer>();
         }
 
         public void DisplayGoalsHistory()
@@ -57,7 +57,8 @@
 
             foreach (var goal in Goals)
             {
-                Console.WriteLine($"In the {goal.Key} minute {goal.Value.Name} with number {goal.Value.Number} scored a goal for {FindTeamName(goal.Value)}");
+                int minutes = goal.Key.Hour > 0 ? goal.Key.Minute + 60 : goal.Key.Minute;
+                Console.WriteLine($"In the {minutes}:{goal.Key.Second} minute {goal.Value.Name} with number {goal.Value.Number} scored a goal for {FindTeamName(goal.Value)}");
             }
 
             Console.WriteLine(new string('-', 50));
@@ -71,12 +72,12 @@
             Console.WriteLine(new string('-', 50));
         }
 
-        public void AddGoal(int minute, FootballPlayer player)
+        public void AddGoal(TimeOnly time, FootballPlayer player)
         {
             if (!TeamOne.Players.Contains(player) && !TeamTwo.Players.Contains(player))
                 throw new ArgumentException("This player is not a part of neither of the teams.");
 
-            Goals.Add(minute, player);
+            Goals.Add(time, player);
         }
 
         private string FindTeamName(FootballPlayer player)
