@@ -199,8 +199,6 @@ game.TeamTwo = new Team
     }
 };
 
-game.Winner = game.TeamTwo;
-
 game.AddGoal(1, game.TeamTwo.Players[0]);
 game.AddGoal(14, game.TeamOne.Players[0]);
 game.AddGoal(45, game.TeamTwo.Players[1]);
