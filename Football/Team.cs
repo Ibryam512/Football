@@ -2,16 +2,16 @@
 {
     class Team
     {
-        private List<FootballPlayer> players;
+        private FootballPlayer[] players;
 
         public string TeamName { get; set; }
         public Coach Coach { get; set; }
-        public List<FootballPlayer> Players 
+        public FootballPlayer[] Players 
         {
             get => this.players;
             set
             {
-                if (value.Count < 11 || value.Count > 22)
+                if (value.Length < 11 || value.Length > 22)
                     throw new ArgumentException("The team must have between 11 and 22 players.");
 
                 this.players = value;

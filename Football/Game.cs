@@ -4,15 +4,12 @@
     {
         private Team teamOne, teamTwo;
 
-        private int GoalsOfTeamOne { get => Goals.Where(player => TeamOne.Players.Contains(player.Value)).Count(); }
-        private int GoalsOfTeamTwo { get => Goals.Where(player => TeamTwo.Players.Contains(player.Value)).Count(); }
-
         public Team TeamOne 
         {
             get => this.teamOne;
             set
             {
-                if (value.Players.Count != 11)
+                if (value.Players.Length != 11)
                     throw new ArgumentException("The players should be exactly 11.");
 
                 this.teamOne = value;
@@ -23,7 +20,7 @@
             get => this.teamTwo;
             set
             {
-                if (value.Players.Count != 11)
+                if (value.Players.Length != 11)
                     throw new ArgumentException("The players should be exactly 11.");
 
                 this.teamTwo = value;
@@ -32,7 +29,7 @@
         public Referee Referee { get; set; }
         public Referee AssistantOne { get; set; }
         public Referee AssistantTwo { get; set; }
-        public Dictionary<int, FootballPlayer> Goals { get; set; }
+        public Dictionary<int, FootballPlayer> Goals { get; private set; }
         public string GameResult 
         { 
             get => $"{GoalsOfTeamOne}" +
@@ -43,6 +40,9 @@
         {
             get => GoalsOfTeamOne > GoalsOfTeamTwo ? TeamOne : TeamTwo;
         }
+
+        public int GoalsOfTeamOne { get => Goals.Where(player => TeamOne.Players.Contains(player.Value)).Count(); }
+        public int GoalsOfTeamTwo { get => Goals.Where(player => TeamTwo.Players.Contains(player.Value)).Count(); }
 
         public Game()
         {
@@ -62,7 +62,12 @@
 
             Console.WriteLine(new string('-', 50));
             Console.WriteLine($"Final result: {GameResult}");
-            Console.WriteLine($"The winner is {Winner.TeamName}");
+
+
+            Console.WriteLine(GoalsOfTeamOne == GoalsOfTeamTwo
+                ? "There is no winner, there is draw"
+                : $"The winner is {Winner.TeamName}");
+
             Console.WriteLine(new string('-', 50));
         }
 
